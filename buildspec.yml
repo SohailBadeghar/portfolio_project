@@ -9,7 +9,7 @@ phases:
 
   pre_build:
     commands:
-      - pip install -r api/requirement.txt
+      - pip install -r blog/requirement.txt
       
   post_build:
     commands:
