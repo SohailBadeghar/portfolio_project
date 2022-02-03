@@ -1,33 +1,23 @@
-{
-"Version": "2012-10-17",
-"Statement": [
-    {
-        "Effect": "Allow",
-        "Resource": [
-            "arn:aws:logs:eu-west-1:723698621383:log-group:/aws/codebuild/project",
-            "arn:aws:logs:eu-west-1:723698621383:log-group:/aws/codebuild/project:*"
-        ],
-        "Action": [
-            "logs:CreateLogGroup",
-            "logs:CreateLogStream",
-            "logs:PutLogEvents"
-        ]
-    },
-    {
-        "Effect": "Allow",
-        "Resource": [
-            "arn:aws:s3:::codepipeline-eu-west-1-*"
-        ],
-        "Action": [
-            "s3:PutObject",
-            "s3:GetObject",
-            "s3:GetObjectVersion"
-        ]
-    },
-    {
-        "Effect": "Allow",
-        "Action": [
-            "ssm:GetParameters"
-        ],
-        "Resource": "arn:aws:ssm:eu-west-1:723698621383:parameter/CodeBuild/*"
-    }
+  
+version: 0.2
+
+phases:
+
+  install:
+    runtime-versions:
+      python: 3.7
+    commands:
+      - "yum update -y"
+
+  pre_build:
+    commands:
+      - pip install -r api/requirement.txt
+      
+  post_build:
+    commands:
+      - echo "Build completed on `date`"
+
+artifacts:
+    files:
+        - '**/*'
+    discard-paths: no
