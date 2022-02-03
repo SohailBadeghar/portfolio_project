@@ -3,13 +3,11 @@ version: 0.2
 
 phases:
 
-  install:
-    runtime-versions:
-      python: 3.7
+  build:
+  
+    command:
+    -echo "this is build phase..... zipping my webpage"
 
-  pre_build:
-    commands:
-      - pip install -r blog/requirement.txt
       
   post_build:
     commands:
