@@ -2,16 +2,22 @@
 version: 0.2
 
 phases:
-  build:
-    command:
-    -echo "this is build phase..... zipping my webpage"
 
+  install:
+    runtime-versions:
+      python: 3.7
+    commands:
+      - "yum update -y"
+
+  pre_build:
+    commands:
+      - pip install -r portfolio_project/requirement.txt
       
   post_build:
     commands:
-      - echo "Depolyed to S3"
+      - echo "Build completed on `date`"
 
 artifacts:
     files:
         - '**/*'
-    
+    discard-paths: no
