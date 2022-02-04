@@ -7,11 +7,13 @@ phases:
     runtime-versions:
       python: 3.7
     commands:
-      - "yum update -y"
+      #- "yum update -y"
+      - echo Installing dependencies
+
 
   pre_build:
     commands:
-      - pip install -r api/requirement.txt
+      - pip install -r requirement.txt
       
   post_build:
     commands:
