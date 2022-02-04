@@ -13,7 +13,7 @@ phases:
 
   pre_build:
     commands:
-      - pip install -r portfolio_project/requirement.txt
+      - pip install -r requirment.txt
       
   post_build:
     commands:
