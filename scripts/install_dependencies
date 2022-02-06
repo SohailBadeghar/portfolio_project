@@ -1,0 +1,54 @@
+#!/bin/bash
+
+echo "################################################## Installing Dependencies Start############################################"
+# source  /home/ubuntu/smart360/smart360venv/bin/activate
+pip install django gunicorn psycopg2-binary
+sudo -H apt install -y libcurl4-openssl-dev libssl-dev python3-pycurl
+# pip install -r /home/ubuntu/smart360/api/requirement.txt
+sudo -H pip install django gunicorn psycopg2-binary
+# sudo -H pip install -r /home/ubuntu/smart360/api/requirement.txt
+echo "################################################## Installing Dependencies End ############################################"
+
+echo "################################################## Setting Permission Start ############################################"
+# sudo chown ubuntu:ubuntu -R /home/ubuntu/smart360
+echo "################################################## Setting Permission End ############################################"
+
+echo "################################################## Setting Environment File Start ############################################"
+# sudo touch /home/ubuntu/smart360/api/.env
+# sudo chmod 777 /home/ubuntu/smart360/api/.env
+echo "################################################## Setting Environment File End ############################################"
+
+echo "################################################## smart360_env=$DEPLOYMENT_GROUP_NAME Start ############################################"
+
+# echo "smart360_env=$DEPLOYMENT_GROUP_NAME" >> /home/ubuntu/smart360/api/.env
+# sed -i "s/smart360_env = ''/smart360_env = \'$DEPLOYMENT_GROUP_NAME\'/g" /home/ubuntu/smart360/api/api/settings.py
+# export smart360_env="$DEPLOYMENT_GROUP_NAME"
+echo "################################################## smart360_env=$DEPLOYMENT_GROUP_NAME End ############################################"
+
+
+echo "################################################## Migrate Start  ############################################"
+cd /home/ubuntu/portfolio_project && sudo python3 manage.py migrate
+echo "################################################## Migrate End############################################"
+
+
+echo "################################################## Loading Data Start ############################################"
+#cd /home/ubuntu/smart360/api && sudo python3 manage.py loaddata data.json
+echo "################################################## Loading Data End ############################################"
+
+echo "############################## SHOWING MIGRATIONS START ######################################################"
+cd /home/ubuntu/portfolio_project && sudo python3 manage.py showmigrations
+echo "############################## SHOWING MIGRATIONS END ######################################################"
+
+# cd /home/ubuntu/smart360/api && cat <(echo "yes") - | python3 manage.py collectstatic
+
+echo "############################## CRON JOBS START ######################################################"
+# cd /home/ubuntu/smart360/api && sudo python3 manage.py crontab remove
+# cd /home/ubuntu/smart360/api && sudo python3 manage.py crontab add
+echo "############################## CRON JOBS END ######################################################"
+
+echo "############################## ASYNC JOBS START ######################################################"
+# cd /home/ubuntu/smart360/api && export C_FORCE_ROOT='true'
+# cd /home/ubuntu/smart360/api && celery -A api worker -Q ImportConsumer -l info -n ImportConsumer_Worker & 
+# cd /home/ubuntu/smart360/api && celery -A api worker -Q Dispatch_I -l info -n Dispatch_I_Worker &
+# cd /home/ubuntu/smart360/api && celery -A api worker -Q Dispatch_II -l info -n Dispatch_II_Worke &
+echo "############################## ASYNC JOBS END ######################################################"
