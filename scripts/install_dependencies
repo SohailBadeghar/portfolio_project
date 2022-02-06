@@ -9,7 +9,7 @@ sudo -H pip install django gunicorn psycopg2-binary
 # sudo -H pip install -r /home/ubuntu/smart360/api/requirement.txt
 echo "################################################## Installing Dependencies End ############################################"
 
-echo "################################################## Setting Permission Start ############################################"
+# echo "################################################## Setting Permission Start ############################################"
 # sudo chown ubuntu:ubuntu -R /home/ubuntu/smart360
 echo "################################################## Setting Permission End ############################################"
 
