@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/smart360/
+    destination: /home/ubuntu/portfolio_project/
 hooks:
   ApplicationStop:
     - location: scripts/stop_server
